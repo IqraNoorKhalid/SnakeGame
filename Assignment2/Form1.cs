@@ -145,8 +145,7 @@ namespace Assignment2
                 }
             }
             // Draw food with shine effect
-            // Draw food as a perfect heart
-            // Draw food based on selected shape
+          
             using (Brush foodBrush = new SolidBrush(foodColor))
             {
                 int padding = 1; // Adjust this for size
@@ -262,28 +261,18 @@ namespace Assignment2
         private void InitializeColorControls()
         {
             // Create a panel for color customization
-          
             pnlColor.BackColor = Color.FromArgb(30, 30, 46);
             pnlColor.BorderStyle = BorderStyle.FixedSingle;
-            pnlColor.Size = new Size(200, 220);
             pnlColor.Name = "pnlColorSettings";
 
             // Title label
-            Label lblColorTitle = new Label();
             lblColorTitle.Text = "🎨 Customize Colors";
             lblColorTitle.ForeColor = Color.White;
             lblColorTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            lblColorTitle.Location = new Point(10, 10);
             lblColorTitle.AutoSize = true;
-            pnlColor.Controls.Add(lblColorTitle);
 
-            int yPos = 40;
-
-            // 1. Snake Body Color
-            Button btnSnakeColor = new Button();
+            // 1. Snake Body Color Button Setup
             btnSnakeColor.Text = "🐍 Snake Body";
-            btnSnakeColor.Size = new Size(180, 30);
-            btnSnakeColor.Location = new Point(10, yPos);
             btnSnakeColor.BackColor = customSnakeColor;
             btnSnakeColor.ForeColor = GetContrastColor(customSnakeColor);
             btnSnakeColor.FlatStyle = FlatStyle.Flat;
@@ -308,14 +297,8 @@ namespace Assignment2
                 }
             };
 
-            pnlColor.Controls.Add(btnSnakeColor);
-            yPos += 35;
-
-            // 2. Snake Head Color
-            Button btnSnakeHeadColor = new Button();
+            // 2. Snake Head Color Button Setup
             btnSnakeHeadColor.Text = "🐍 Snake Head";
-            btnSnakeHeadColor.Size = new Size(180, 30);
-            btnSnakeHeadColor.Location = new Point(10, yPos);
             btnSnakeHeadColor.BackColor = customSnakeHeadColor;
             btnSnakeHeadColor.ForeColor = GetContrastColor(customSnakeHeadColor);
             btnSnakeHeadColor.FlatStyle = FlatStyle.Flat;
@@ -340,14 +323,8 @@ namespace Assignment2
                 }
             };
 
-            pnlColor.Controls.Add(btnSnakeHeadColor);
-            yPos += 35;
-
-            // 3. Food Color
-            Button btnFoodColor = new Button();
+            // 3. Food Color Button Setup
             btnFoodColor.Text = "🍎 Food Color";
-            btnFoodColor.Size = new Size(180, 30);
-            btnFoodColor.Location = new Point(10, yPos);
             btnFoodColor.BackColor = customFoodColor;
             btnFoodColor.ForeColor = GetContrastColor(customFoodColor);
             btnFoodColor.FlatStyle = FlatStyle.Flat;
@@ -372,14 +349,8 @@ namespace Assignment2
                 }
             };
 
-            pnlColor.Controls.Add(btnFoodColor);
-            yPos += 35;
-
-            // 4. Panel Background Color
-            Button btnPanelColor = new Button();
+            // 4. Panel Background Color Button Setup
             btnPanelColor.Text = "🎯 Panel Background";
-            btnPanelColor.Size = new Size(180, 30);
-            btnPanelColor.Location = new Point(10, yPos);
             btnPanelColor.BackColor = customPanelBackground;
             btnPanelColor.ForeColor = GetContrastColor(customPanelBackground);
             btnPanelColor.FlatStyle = FlatStyle.Flat;
@@ -407,14 +378,8 @@ namespace Assignment2
                 }
             };
 
-            pnlColor.Controls.Add(btnPanelColor);
-            yPos += 40;
-
-            // 5. Reset Colors Button
-            Button btnResetColors = new Button();
+            // 5. Reset Colors Button Setup
             btnResetColors.Text = "🔄 Reset to Default";
-            btnResetColors.Size = new Size(180, 30);
-            btnResetColors.Location = new Point(10, yPos);
             StyleButton(btnResetColors, Color.FromArgb(100, 100, 100));
 
             btnResetColors.Click += (s, e) =>
@@ -435,100 +400,118 @@ namespace Assignment2
                 DrawEnhancedGrid();
                 pnlGame.Invalidate();
             };
-
-            pnlColor.Controls.Add(btnResetColors);
-
-            // Position color panel
-            Control settingsPanel = this.Controls.Find("pnlFoodSettings", true).FirstOrDefault();
-            if (settingsPanel != null)
-            {
-                pnlColor.Location = new Point(
-                    settingsPanel.Right + 20,
-                    settingsPanel.Top
-                );
-            }
-            else
-            {
-                pnlColor.Location = new Point(
-                    gbControls.Left,
-                    gbControls.Bottom + 20
-                );
-            }
-
-            // Add to form
-            this.Controls.Add(pnlColor);
-            pnlColor.BringToFront();
         }
         private void InitializeSettingsPanel()
         {
-            // Create a panel for settings
-            Panel settingsPanel = new Panel();
-            settingsPanel.BackColor = Color.FromArgb(30, 30, 46);
-            settingsPanel.BorderStyle = BorderStyle.FixedSingle;
-            settingsPanel.Size = new Size(180, 160);
-            settingsPanel.Name = "pnlFoodSettings"; // Add name for reference
+            pnlSettingsPanel.BackColor = Color.FromArgb(30, 30, 46);
+            pnlSettingsPanel.BorderStyle = BorderStyle.FixedSingle;
+            pnlSettingsPanel.Size = new Size(180, 180);
+            pnlSettingsPanel.Name = "pnlFoodSettings";
 
             // Title label
-            Label lblFoodShape = new Label();
             lblFoodShape.Text = "🍎 Food Shape";
             lblFoodShape.ForeColor = Color.White;
             lblFoodShape.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            lblFoodShape.Location = new Point(10, 10);
             lblFoodShape.AutoSize = true;
-            settingsPanel.Controls.Add(lblFoodShape);
+            lblFoodShape.Location = new Point(10, 10);
+            pnlSettingsPanel.Controls.Add(lblFoodShape);
 
-            // Create radio buttons
-            int yPos = 40;
-            string[] shapeNames = { "Heart", "Circle", "Diamond", "Square", "Star" };
-            string[] shapeEmojis = { "❤️", "🔵", "💎", "⬜", "⭐" };
-
-            // Store the first radio button reference
-            RadioButton firstRadioButton = null;
-
-            foreach (FoodShape shape in Enum.GetValues(typeof(FoodShape)))
+            // Create individual radio buttons (not in a loop)
+            RadioButton rbHeart = new RadioButton();
+            rbHeart.Text = "❤️ Heart";
+            rbHeart.Tag = FoodShape.Heart;
+            rbHeart.ForeColor = Color.LightGray;
+            rbHeart.BackColor = Color.Transparent;
+            rbHeart.AutoSize = true;
+            rbHeart.Location = new Point(20, 40);
+            rbHeart.Checked = (currentFoodShape == FoodShape.Heart);
+            rbHeart.CheckedChanged += (s, e) =>
             {
-                RadioButton rb = new RadioButton();
-                rb.Text = $"{shapeEmojis[(int)shape]} {shapeNames[(int)shape]}";
-                rb.Tag = shape;
-                rb.Location = new Point(15, yPos);
-                rb.ForeColor = Color.LightGray;
-                rb.BackColor = Color.Transparent;
-                rb.AutoSize = true;
-
-                // Set checked based on currentFoodShape
-                rb.Checked = (shape == currentFoodShape);
-
-                if (firstRadioButton == null)
-                    firstRadioButton = rb;
-
-                rb.CheckedChanged += (s, e) =>
+                if (rbHeart.Checked)
                 {
-                    if (rb.Checked)
-                    {
-                        currentFoodShape = (FoodShape)rb.Tag;
-                        pnlGame.Invalidate(); // Redraw with new shape
-                    }
-                };
+                    currentFoodShape = FoodShape.Heart;
+                    pnlGame.Invalidate();
+                }
+            };
+            pnlSettingsPanel.Controls.Add(rbHeart);
 
-                settingsPanel.Controls.Add(rb);
-                yPos += 25;
-            }
+            RadioButton rbCircle = new RadioButton();
+            rbCircle.Text = "🔵 Circle";
+            rbCircle.Tag = FoodShape.Circle;
+            rbCircle.ForeColor = Color.LightGray;
+            rbCircle.BackColor = Color.Transparent;
+            rbCircle.AutoSize = true;
+            rbCircle.Location = new Point(20, 65);
+            rbCircle.Checked = (currentFoodShape == FoodShape.Circle);
+            rbCircle.CheckedChanged += (s, e) =>
+            {
+                if (rbCircle.Checked)
+                {
+                    currentFoodShape = FoodShape.Circle;
+                    pnlGame.Invalidate();
+                }
+            };
+            pnlSettingsPanel.Controls.Add(rbCircle);
+
+            RadioButton rbDiamond = new RadioButton();
+            rbDiamond.Text = "💎 Diamond";
+            rbDiamond.Tag = FoodShape.Diamond;
+            rbDiamond.ForeColor = Color.LightGray;
+            rbDiamond.BackColor = Color.Transparent;
+            rbDiamond.AutoSize = true;
+            rbDiamond.Location = new Point(20, 90);
+            rbDiamond.Checked = (currentFoodShape == FoodShape.Diamond);
+            rbDiamond.CheckedChanged += (s, e) =>
+            {
+                if (rbDiamond.Checked)
+                {
+                    currentFoodShape = FoodShape.Diamond;
+                    pnlGame.Invalidate();
+                }
+            };
+            pnlSettingsPanel.Controls.Add(rbDiamond);
+
+            RadioButton rbSquare = new RadioButton();
+            rbSquare.Text = "⬜ Square";
+            rbSquare.Tag = FoodShape.Square;
+            rbSquare.ForeColor = Color.LightGray;
+            rbSquare.BackColor = Color.Transparent;
+            rbSquare.AutoSize = true;
+            rbSquare.Location = new Point(20, 115);
+            rbSquare.Checked = (currentFoodShape == FoodShape.Square);
+            rbSquare.CheckedChanged += (s, e) =>
+            {
+                if (rbSquare.Checked)
+                {
+                    currentFoodShape = FoodShape.Square;
+                    pnlGame.Invalidate();
+                }
+            };
+            pnlSettingsPanel.Controls.Add(rbSquare);
+
+            RadioButton rbStar = new RadioButton();
+            rbStar.Text = "⭐ Star";
+            rbStar.Tag = FoodShape.Star;
+            rbStar.ForeColor = Color.LightGray;
+            rbStar.BackColor = Color.Transparent;
+            rbStar.AutoSize = true;
+            rbStar.Location = new Point(20, 140);
+            rbStar.Checked = (currentFoodShape == FoodShape.Star);
+            rbStar.CheckedChanged += (s, e) =>
+            {
+                if (rbStar.Checked)
+                {
+                    currentFoodShape = FoodShape.Star;
+                    pnlGame.Invalidate();
+                }
+            };
+            pnlSettingsPanel.Controls.Add(rbStar);
 
             // Ensure at least one is checked
-            if (firstRadioButton != null && !settingsPanel.Controls.OfType<RadioButton>().Any(rb => rb.Checked))
+            if (!pnlSettingsPanel.Controls.OfType<RadioButton>().Any(rb => rb.Checked))
             {
-                firstRadioButton.Checked = true;
+                rbHeart.Checked = true;
             }
-
-            // Position settings panel
-            settingsPanel.Location = new Point(
-                gbControls.Left,
-                gbControls.Bottom + 20
-            );
-
-            // Add to form
-            this.Controls.Add(settingsPanel);
-            settingsPanel.BringToFront();
         }
         private Color GetContrastColor(Color color)
         {

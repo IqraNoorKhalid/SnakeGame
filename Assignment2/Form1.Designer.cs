@@ -39,8 +39,18 @@
             lblInstructions = new Label();
             gbControls = new GroupBox();
             pnlColor = new Panel();
+            btnResetColors = new Button();
+            btnPanelColor = new Button();
+            btnFoodColor = new Button();
+            btnSnakeHeadColor = new Button();
+            btnSnakeColor = new Button();
+            lblColorTitle = new Label();
+            pnlSettingsPanel = new Panel();
+            lblFoodShape = new Label();
             tmrGame = new System.Windows.Forms.Timer(components);
             gbControls.SuspendLayout();
+            pnlColor.SuspendLayout();
+            pnlSettingsPanel.SuspendLayout();
             SuspendLayout();
             // 
             // tmrGame
@@ -132,10 +142,87 @@
             // 
             // pnlColor
             // 
+            pnlColor.Controls.Add(btnResetColors);
+            pnlColor.Controls.Add(btnPanelColor);
+            pnlColor.Controls.Add(btnFoodColor);
+            pnlColor.Controls.Add(btnSnakeHeadColor);
+            pnlColor.Controls.Add(btnSnakeColor);
+            pnlColor.Controls.Add(lblColorTitle);
             pnlColor.Location = new Point(920, 33);
             pnlColor.Name = "pnlColor";
-            pnlColor.Size = new Size(250, 228);
+            pnlColor.Size = new Size(242, 285);
             pnlColor.TabIndex = 9;
+            // 
+            // btnResetColors
+            // 
+            btnResetColors.Location = new Point(22, 242);
+            btnResetColors.Name = "btnResetColors";
+            btnResetColors.Size = new Size(180, 30);
+            btnResetColors.TabIndex = 5;
+            btnResetColors.Text = "Reset";
+            btnResetColors.UseVisualStyleBackColor = true;
+            // 
+            // btnPanelColor
+            // 
+            btnPanelColor.Location = new Point(22, 197);
+            btnPanelColor.Name = "btnPanelColor";
+            btnPanelColor.Size = new Size(180, 30);
+            btnPanelColor.TabIndex = 4;
+            btnPanelColor.Text = "Panel Color";
+            btnPanelColor.UseVisualStyleBackColor = true;
+            // 
+            // btnFoodColor
+            // 
+            btnFoodColor.Location = new Point(22, 153);
+            btnFoodColor.Name = "btnFoodColor";
+            btnFoodColor.Size = new Size(180, 30);
+            btnFoodColor.TabIndex = 3;
+            btnFoodColor.Text = "Food Color";
+            btnFoodColor.UseVisualStyleBackColor = true;
+            // 
+            // btnSnakeHeadColor
+            // 
+            btnSnakeHeadColor.Location = new Point(22, 102);
+            btnSnakeHeadColor.Name = "btnSnakeHeadColor";
+            btnSnakeHeadColor.Size = new Size(180, 30);
+            btnSnakeHeadColor.TabIndex = 2;
+            btnSnakeHeadColor.Text = "Snake Head Color";
+            btnSnakeHeadColor.UseVisualStyleBackColor = true;
+            // 
+            // btnSnakeColor
+            // 
+            btnSnakeColor.Location = new Point(22, 55);
+            btnSnakeColor.Name = "btnSnakeColor";
+            btnSnakeColor.Size = new Size(180, 30);
+            btnSnakeColor.TabIndex = 1;
+            btnSnakeColor.Text = "Snake Color";
+            btnSnakeColor.UseVisualStyleBackColor = true;
+            // 
+            // lblColorTitle
+            // 
+            lblColorTitle.AutoSize = true;
+            lblColorTitle.Location = new Point(22, 22);
+            lblColorTitle.Name = "lblColorTitle";
+            lblColorTitle.Size = new Size(50, 20);
+            lblColorTitle.TabIndex = 0;
+            lblColorTitle.Text = "label1";
+            // 
+            // pnlSettingsPanel
+            // 
+            pnlSettingsPanel.Controls.Add(lblFoodShape);
+            pnlSettingsPanel.Location = new Point(923, 341);
+            pnlSettingsPanel.Name = "pnlSettingsPanel";
+            pnlSettingsPanel.Size = new Size(250, 160);
+            pnlSettingsPanel.TabIndex = 10;
+            // 
+            // lblFoodShape
+            // 
+            lblFoodShape.AutoSize = true;
+            lblFoodShape.Location = new Point(16, 24);
+            lblFoodShape.Name = "lblFoodShape";
+            lblFoodShape.Size = new Size(88, 20);
+            lblFoodShape.TabIndex = 0;
+            lblFoodShape.Text = "Food Shape";
             // 
             // Form1
             // 
@@ -143,6 +230,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new Size(1209, 653);
+            Controls.Add(pnlSettingsPanel);
             Controls.Add(pnlColor);
             Controls.Add(gbControls);
             Controls.Add(lblInstructions);
@@ -157,6 +245,10 @@
             KeyDown += Form1_KeyDown;
             gbControls.ResumeLayout(false);
             gbControls.PerformLayout();
+            pnlColor.ResumeLayout(false);
+            pnlColor.PerformLayout();
+            pnlSettingsPanel.ResumeLayout(false);
+            pnlSettingsPanel.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -173,5 +265,13 @@
         private Label lblInstructions;
         private GroupBox gbControls;
         private Panel pnlColor;
+        private Label lblColorTitle;
+        private Button btnSnakeColor;
+        private Button btnSnakeHeadColor;
+        private Button btnFoodColor;
+        private Button btnPanelColor;
+        private Button btnResetColors;
+        private Panel pnlSettingsPanel;
+        private Label lblFoodShape;
     }
 }
